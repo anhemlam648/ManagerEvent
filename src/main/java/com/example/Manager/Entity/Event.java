@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -30,4 +31,12 @@ public class Event {
 
     @Column(length = 500)
     private String description;
+
+
+    @ManyToOne
+    @JoinColumn(name = "location_id", nullable = false)
+    private Location location;
+
+    @OneToMany(mappedBy = "event")
+    private Set<Participant> participants;
 }
