@@ -15,11 +15,14 @@ public class ParticipantServiceImpl implements ParticipantService {
     @Autowired
     private ParticipantRepository participantRepository;
 
+    @Autowired
+    private MapParticipant mapParticipant;
+
     @Override
     public ParticipantDto createParticipant(ParticipantDto participantDto) {
-        Participant participant = MapParticipant.Mapparticiant(participantDto);
+        Participant participant = mapParticipant.MapParticipant(participantDto);
         Participant savedParticipant = participantRepository.save(participant);
-        return MapParticipant.MapDtoparticiant(savedParticipant);
+        return mapParticipant.MapDtoParticipant(savedParticipant);
     }
 
     @Override
@@ -29,7 +32,7 @@ public class ParticipantServiceImpl implements ParticipantService {
         existingParticipant.setName(participantDto.getName());
         existingParticipant.setEmail(participantDto.getEmail());
         participantRepository.save(existingParticipant);
-        return MapParticipant.MapDtoparticiant(existingParticipant);
+        return mapParticipant.MapDtoParticipant(existingParticipant);
     }
 
     @Override
@@ -41,13 +44,13 @@ public class ParticipantServiceImpl implements ParticipantService {
     public ParticipantDto getParticipantById(Long id) {
         Participant participant = participantRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Participant not found"));
-        return MapParticipant.MapDtoparticiant(participant);
+        return mapParticipant.MapDtoParticipant(participant);
     }
 
     @Override
     public List<ParticipantDto> getAllParticipants() {
         return participantRepository.findAll().stream()
-                .map(MapParticipant::MapDtoparticiant)
+                .map(mapParticipant::MapDtoParticipant)
                 .collect(Collectors.toList());
     }
 }
