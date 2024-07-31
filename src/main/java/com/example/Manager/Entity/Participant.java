@@ -22,4 +22,8 @@ public class Participant {
 
     @Column(nullable = false)
     private String email;
+
+    @ManyToOne
+    @JoinColumn(name = "event_id", nullable = false)
+    private Event event;
 }
