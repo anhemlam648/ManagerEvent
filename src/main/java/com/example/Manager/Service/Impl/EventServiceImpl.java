@@ -17,11 +17,14 @@ public class EventServiceImpl implements EventService {
     @Autowired
     private EventRepository eventRepository;
 
+    @Autowired
+    private MapEvent mapEvent;
+
     @Override
     public EventDto createEvent(EventDto eventDto) {
-        Event event = MapEvent.MapEvent(eventDto);
+        Event event = mapEvent.MapEvent(eventDto);
         event = eventRepository.save(event);
-        return MapEvent.MapDtoEvent(event);
+        return mapEvent.MapDtoEvent(event);
     }
 
     @Override
@@ -33,7 +36,7 @@ public class EventServiceImpl implements EventService {
         existingEvent.setStartDate(eventDto.getStartDate());
         existingEvent.setEndDate(eventDto.getEndDate());
         eventRepository.save(existingEvent);
-        return MapEvent.MapDtoEvent(existingEvent);
+        return mapEvent.MapDtoEvent(existingEvent);
     }
 
     @Override
@@ -45,13 +48,13 @@ public class EventServiceImpl implements EventService {
     public EventDto getEventById(Long id) {
         Event event = eventRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Event not found"));
-        return MapEvent.MapDtoEvent(event);
+        return mapEvent.MapDtoEvent(event);
     }
 
     @Override
     public List<EventDto> getAllEvents() {
         return eventRepository.findAll().stream()
-                .map(MapEvent::MapDtoEvent)
+                .map(mapEvent::MapDtoEvent)
                 .collect(Collectors.toList());
     }
 }
