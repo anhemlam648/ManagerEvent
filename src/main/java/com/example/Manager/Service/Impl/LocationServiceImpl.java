@@ -15,11 +15,14 @@ public class LocationServiceImpl implements LocationService {
     @Autowired
     private LocationRepository locationRepository;
 
+    @Autowired
+    private MapLocation mapLocation;
+
     @Override
     public LocationDto createLocation(LocationDto locationDto) {
-        Location location = MapLocation.Maplocation(locationDto);
+        Location location = mapLocation.MapLocation(locationDto);
         Location savedLocation = locationRepository.save(location);
-        return MapLocation.MapDtolocation(savedLocation);
+        return mapLocation.MapDtoLocation(savedLocation);
     }
 
     @Override
@@ -30,7 +33,7 @@ public class LocationServiceImpl implements LocationService {
         existingLocation.setLocation(locationDto.getLocation());
         existingLocation.setCapacity(locationDto.getCapacity());
         locationRepository.save(existingLocation);
-        return MapLocation.MapDtolocation(existingLocation);
+        return mapLocation.MapDtoLocation(existingLocation);
     }
 
     @Override
@@ -42,13 +45,13 @@ public class LocationServiceImpl implements LocationService {
     public LocationDto getLocationById(Long id) {
         Location location = locationRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Location not found"));
-        return MapLocation.MapDtolocation(location);
+        return mapLocation.MapDtoLocation(location);
     }
 
     @Override
     public List<LocationDto> getAllLocations() {
         return locationRepository.findAll().stream()
-                .map(MapLocation::MapDtolocation)
+                .map(mapLocation::MapDtoLocation)
                 .collect(Collectors.toList());
     }
 }
