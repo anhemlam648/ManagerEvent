@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Set;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -25,4 +27,7 @@ public class Location {
 
     @Column(nullable = false)
     private int capacity;
+
+    @OneToMany(mappedBy = "location")
+    private Set<Event> events;
 }
