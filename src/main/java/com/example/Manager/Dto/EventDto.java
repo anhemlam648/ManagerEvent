@@ -18,4 +18,5 @@ public class EventDto {
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     private String description;
+    private Long locationId;
 }
