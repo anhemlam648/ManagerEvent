@@ -15,4 +15,5 @@ public class LocationDto {
     private String name;
     private String location;
     private int capacity;
+    private Long event;
 }
