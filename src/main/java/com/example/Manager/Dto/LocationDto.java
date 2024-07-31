@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Set;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -15,5 +17,5 @@ public class LocationDto {
     private String name;
     private String location;
     private int capacity;
-    private Long event;
+    private Set<Long> eventIds;
 }
