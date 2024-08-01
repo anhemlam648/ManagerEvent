@@ -6,8 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
-@Controller
+@RestController
 @RequestMapping("/participants")
 @CrossOrigin("http://localhost:3030")
 public class ControllerParticipant {
+
 }
