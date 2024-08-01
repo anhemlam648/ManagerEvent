@@ -1,6 +1,7 @@
 package com.example.Manager.Controller;
 
 import com.example.Manager.Dto.LocationDto;
+import com.example.Manager.Service.ConfigService;
 import com.example.Manager.Service.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,15 @@ public class ControllerLocation {
 
     @Autowired
     private LocationService locationService;
+
+    @Autowired
+    private ConfigService configService;
+
+    @RequestMapping("/service")
+    public String testService() {
+        configService.performService();
+        return "Service performed successfully";
+    }
 
     @PostMapping
     public ResponseEntity<LocationDto> createLocation(@RequestBody LocationDto locationDto) {
