@@ -1,6 +1,7 @@
 package com.example.Manager.Controller;
 
 import com.example.Manager.Dto.EventDto;
+import com.example.Manager.Service.ConfigService;
 import com.example.Manager.Service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,15 @@ import java.util.List;
 public class ControllerEvent {
     @Autowired
     private EventService eventService;
+
+    @Autowired
+    private ConfigService configService;
+
+    @RequestMapping("/service")
+    public String testService() {
+        configService.performService();
+        return "Service performed successfully";
+    }
 
     @PostMapping
     public ResponseEntity<EventDto> createEvent(@RequestBody EventDto eventDto) {

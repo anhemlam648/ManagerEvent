@@ -1,5 +1,7 @@
 package com.example.Manager.Config;
 
+import com.example.Manager.Service.ConfigService;
+import com.example.Manager.Service.Impl.ServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -22,6 +24,9 @@ public class AppConfig {
             }
         };
     }
-
+    @Bean
+    public ConfigService configService() {
+        return new ServiceImpl();
+    }
 
 }
